@@ -1,0 +1,32 @@
+.pageHeaderGreetings:where(.ant-page-header) {
+  margin-bottom: 0 !important;
+}
+
+.pageHeaderContent {
+  display: flex;
+  height: 70px;
+}
+
+.pageHeaderContent .avatar {
+  flex: 0 1 72px;
+  margin-bottom: 8px;
+}
+
+.pageHeaderContent .avatar > span {
+  display: block;
+  width: 72px;
+  height: 72px;
+}
+
+.pageHeaderContent .content {
+  flex: 1 1 auto;
+  margin-left: 15px;
+  line-height: 22px;
+}
+
+.pageHeaderContent .content .contentTitle {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}

@@ -1,0 +1,31 @@
+.projectItemContent {
+  display: flex;
+  height: 20px;
+  margin-top: 8px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 20px;
+}
+.projectItemContent a {
+  display: inline-block;
+  flex: 1 1 0;
+}
+.projectItemContent .datetime {
+  margin-top: 3px;
+  flex: 0 0 auto;
+  float: right;
+}
+
+.cardTitleSub {
+  display: inline-block;
+  height: 24px;
+  margin-top: 3px;
+  margin-left: 12px;
+  font-size: 14px;
+  line-height: 24px;
+  vertical-align: top;
+  color: rgba(0, 0, 0, 0.88);
+}
+.cardTitleSub:hover {
+  color: rgba(50, 50, 50, 0.88)
+}
