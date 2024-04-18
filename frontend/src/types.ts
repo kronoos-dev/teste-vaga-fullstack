@@ -1,4 +1,6 @@
 export interface Contract {
+    vlPag: number;
+    vlMovimento: number;
     id:                 number; 
     nrInst:             number;
     nrAgencia:          number;
