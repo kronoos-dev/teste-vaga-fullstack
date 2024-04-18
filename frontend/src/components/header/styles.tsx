@@ -8,5 +8,6 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-    font-size: 24px;
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
 `;

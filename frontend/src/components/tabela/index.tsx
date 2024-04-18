@@ -12,7 +12,8 @@ import {
     handleSearch, 
     filterContracts, 
     toggleSortOrder 
-} from '../../utils/sorting&filter/index';
+} from '../../utils/filtroE/index';
+import { Button, ButtonDiv, Content, Input, StyledTable, TableWrapper, Td, Th, Tr } from './styles';
 
 const Table = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -33,87 +34,101 @@ const Table = () => {
     const filteredContracts = filterContracts(allContracts, searchTerm);
 
     return (
-        <div>
-            <h2>Pesquise por página</h2>
-            <input type="text" value={searchTerm} onChange={(event) => handleSearch(event, setSearchTerm)} />
+        <>
+        <Content>
+            <h2>Pesquisar por página</h2>
+            <Input type="text" value={searchTerm} onChange={(event) => handleSearch(event, setSearchTerm)} />
+        </Content>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <StyledTable>
             {loading && <div>Carregando...</div>}
             {error && <div>Ocorreu um erro: {error}</div>}
-            <table>
-                <thead>
-                    <tr>
-                    <th>ID <button onClick={() => toggleSortOrder(sortOrder, setSortOrder, allContracts, setAllContracts)}>
-                        {sortOrder === 'asc' ? '↓' : '↑'}
-                    </button></th>
-                        <th>Número da Instituição</th>
-                        <th>Número da Agência</th>
-                        <th>Código do Cliente</th>
-                        <th>Nome do Cliente</th>
-                        <th>CPF/CNPJ</th>
-                        <th>Número do Contrato</th>
-                        <th>Data do Contrato</th>
-                        <th>Quantidade de Prestações</th>
-                        <th>Valor Total</th>
-                        <th>Código do Produto</th>
-                        <th>Descrição do Produto</th>
-                        <th>Código da Carteira</th>
-                        <th>Descrição da Carteira</th>
-                        <th>Número da Proposta</th>
-                        <th>Número da Prestação</th>
-                        <th>Tipo de Prestação</th>
-                        <th>Número da Sequência da Prestação</th>
-                        <th>Data de Vencimento da Prestação</th>
-                        <th>Valor da Prestação</th>
-                        <th>Valor de Mora</th>
-                        <th>Valor de Multa</th>
-                        <th>Valor de Outros Acréscimos</th>
-                        <th>Valor do IOF</th>
-                        <th>Valor de Desconto</th>
-                        <th>Valor Atual</th>
-                        <th>ID Situação</th>
-                        <th>ID Situação Venda</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredContracts.map(contract => {
-                        checkConsistency(contract); 
-                        return (
-                            <tr key={contract.id}>
-                                <td>{contract.id}</td>
-                                <td>{contract.nrInst}</td>
-                                <td>{contract.nrAgencia}</td>
-                                <td>{contract.cdClient}</td>  
-                                <td>{contract.nmClient}</td>
-                                <td>{validateCpfCnpj(contract.nrCpfCnpj)}</td>
-                                <td>{contract.nrContrat}</td>
-                                <td>{contract.dtContrato && contract.dtContrato.slice(0, 10)}</td>
-                                <td>{contract.qtPrestacoes}</td> 
-                                <td>{formatCurrency(contract.vlTotal)}</td>
-                                <td>{contract.cdProduto}</td> 
-                                <td>{contract.dsProduto}</td>
-                                <td>{contract.cdCarteira}</td>
-                                <td>{contract.dsCarteira}</td>
-                                <td>{contract.nrProposta}</td>
-                                <td>{contract.nrPresta}</td>
-                                <td>{contract.tpPresta}</td>
-                                <td>{contract.nrSeqPre}</td>
-                                <td>{contract.dtVctPre && contract.dtVctPre.slice(0, 10)}</td>
-                                <td>{formatCurrency(contract.vlPresta)}</td>
-                                <td>{formatCurrency(contract.vlMora)}</td>
-                                <td>{formatCurrency(contract.vlMulta)}</td>
-                                <td>{formatCurrency(contract.vlOutAcr)}</td>
-                                <td>{formatCurrency(contract.vlIof)}</td>
-                                <td>{formatCurrency(contract.vlDescon)}</td>
-                                <td>{formatCurrency(contract.vlAtual)}</td>
-                                <td>{contract.idSituac}</td>
-                                <td>{contract.idSitVen}</td> 
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <button onClick={() => goToPreviousPage(currentPage, setCurrentPage)} disabled={currentPage === 1}>Anterior</button>
-            <button onClick={() => goToNextPage(currentPage, setCurrentPage)}>Próxima</button>
+            {filteredContracts.length === 0 ? (
+                <div style={{ textAlign: 'center', marginTop: '20px', color: 'white'}}>
+                    <p>Nenhum resultado encontrado. Lembre-se de olhar nas próximas páginas!</p>
+                </div>
+            ) : (
+                <TableWrapper>
+                    <thead>
+                        <tr>
+                            <Th>ID <Button onClick={() => toggleSortOrder(sortOrder, setSortOrder, allContracts, setAllContracts)}>
+                                {sortOrder === 'asc' ? '▼' : '▲'}
+                            </Button></Th>
+                            <Th>Número da Instituição</Th>
+                            <Th>Número da Agência</Th>
+                            <Th>Código do Cliente</Th>
+                            <Th>Nome do Cliente</Th>
+                            <Th>CPF/CNPJ</Th>
+                            <Th>Número do Contrato</Th>
+                            <Th>Data do Contrato</Th>
+                            <Th>Quantidade de Prestações</Th>
+                            <Th>Valor Total</Th>
+                            <Th>Código do Produto</Th>
+                            <Th>Descrição do Produto</Th>
+                            <Th>Código da Carteira</Th>
+                            <Th>Descrição da Carteira</Th>
+                            <Th>Número da Proposta</Th>
+                            <Th>Número da Prestação</Th>
+                            <Th>Tipo de Prestação</Th>
+                            <Th>Número da Sequência da Prestação</Th>
+                            <Th>Data de Vencimento da Prestação</Th>
+                            <Th>Valor da Prestação</Th>
+                            <Th>Valor de Mora</Th>
+                            <Th>Valor de Multa</Th>
+                            <Th>Valor de Outros Acréscimos</Th>
+                            <Th>Valor do IOF</Th>
+                            <Th>Valor de Desconto</Th>
+                            <Th>Valor Atual</Th>
+                            <Th>ID Situação</Th>
+                            <Th>ID Situação Venda</Th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredContracts.map(contract => {
+                            checkConsistency(contract); 
+                            return (
+                                <Tr key={contract.id}>
+                                <Td>{contract.id}</Td>
+                                <Td>{contract.nrInst}</Td>
+                                <Td>{contract.nrAgencia}</Td>
+                                <Td>{contract.cdClient}</Td>  
+                                <Td>{contract.nmClient}</Td>
+                                <Td>{validateCpfCnpj(contract.nrCpfCnpj)}</Td>
+                                <Td>{contract.nrContrat}</Td>
+                                <Td>{contract.dtContrato && contract.dtContrato.slice(0, 10)}</Td>
+                                <Td>{contract.qtPrestacoes}</Td> 
+                                <Td>{formatCurrency(contract.vlTotal)}</Td>
+                                <Td>{contract.cdProduto}</Td> 
+                                <Td>{contract.dsProduto}</Td>
+                                <Td>{contract.cdCarteira}</Td>
+                                <Td>{contract.dsCarteira}</Td>
+                                <Td>{contract.nrProposta}</Td>
+                                <Td>{contract.nrPresta}</Td>
+                                <Td>{contract.tpPresta}</Td>
+                                <Td>{contract.nrSeqPre}</Td>
+                                <Td>{contract.dtVctPre && contract.dtVctPre.slice(0, 10)}</Td>
+                                <Td>{formatCurrency(contract.vlPresta)}</Td>
+                                <Td>{formatCurrency(contract.vlMora)}</Td>
+                                <Td>{formatCurrency(contract.vlMulta)}</Td>
+                                <Td>{formatCurrency(contract.vlOutAcr)}</Td>
+                                <Td>{formatCurrency(contract.vlIof)}</Td>
+                                <Td>{formatCurrency(contract.vlDescon)}</Td>
+                                <Td>{formatCurrency(contract.vlAtual)}</Td>
+                                <Td>{contract.idSituac}</Td>
+                                <Td>{contract.idSitVen}</Td> 
+                            </Tr>
+                            );
+                        })}
+                    </tbody>
+                </TableWrapper>
+            )}
+            <ButtonDiv>
+                <Button onClick={() => goToPreviousPage(currentPage, setCurrentPage)} disabled={currentPage === 1}>Anterior</Button>
+                <Button onClick={() => goToNextPage(currentPage, setCurrentPage)}>Próxima</Button>
+            </ButtonDiv>
+        </StyledTable>
         </div>
+        </>
     );
 };
 
