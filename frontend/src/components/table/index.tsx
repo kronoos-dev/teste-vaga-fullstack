@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/index';
 import { Contract } from '../../types';
-import { formatCurrency } from '../../utils/moeda/index';
+import { formatCurrency } from '../../utils/coin/index';
 import { validateCpfCnpj } from '../../utils/cpfCnpj/index';
-import { checkConsistency } from '../../utils/calculo/index';
+import { checkConsistency } from '../../utils/calculation/index';
 import { fetchData } from '../../utils/api';
 import { 
     goToPreviousPage, 
@@ -12,7 +12,7 @@ import {
     handleSearch, 
     filterContracts, 
     toggleSortOrder 
-} from '../../utils/filtroE/index';
+} from '../../utils/filter&sort/index';
 import { Button, ButtonDiv, Content, Input, StyledTable, TableWrapper, Td, Th, Tr } from './styles';
 
 const Table = () => {
@@ -36,8 +36,8 @@ const Table = () => {
     return (
         <>
         <Content>
-            <h2>Pesquisar por página</h2>
-            <Input type="text" value={searchTerm} onChange={(event) => handleSearch(event, setSearchTerm)} />
+            
+            <Input type="text" placeholder="Pesquise" value={searchTerm} onChange={(event) => handleSearch(event, setSearchTerm)} />
         </Content>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
         <StyledTable>

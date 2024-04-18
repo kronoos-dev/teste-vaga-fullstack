@@ -62,7 +62,7 @@ export const Content = styled.div`
     margin-left: 50px;
 
     h2 {
-        margin-bottom: 5px;
+        margin-bottom: 4px;
     }
 `;
 

@@ -1,5 +1,5 @@
 "use client"
-import Table from "@/components/tabela";
+import Table from "@/components/table";
 import { Provider } from "react-redux";
 import { store } from "../store"; // Importe o store Redux
 import { Header } from "@/components/header";
