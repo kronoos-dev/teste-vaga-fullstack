@@ -4,6 +4,7 @@ import { fetchContractsStart, fetchContractsSuccess, fetchContractsFailure } fro
 import { RootState, AppDispatch } from '../../store/index';
 import { Contract } from '../../types';
 import { formatCurrency } from '../../utils/moeda/index';
+import { validateCpfCnpj } from '../../utils/cpfCnpj/index';
 
 const Table = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -87,7 +88,7 @@ const Table = () => {
                             <td>{contract.nrAgencia}</td>
                             <td>{contract.cdClient}</td>  
                             <td>{contract.nmClient}</td>
-                            <td>{contract.nrCpfCnpj}</td>
+                            <td>{validateCpfCnpj(contract.nrCpfCnpj)}</td>
                             <td>{contract.nrContrat}</td>
                             <td>{contract.dtContrato && contract.dtContrato.slice(0, 10)}</td>
                             <td>{contract.qtPrestacoes}</td> 
