@@ -11,7 +11,9 @@ const Table = () => {
     const dispatch: AppDispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
-    const [inconsistencyMessage, setInconsistencyMessage] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [allContracts, setAllContracts] = useState<Contract[]>([]);
+    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
     
     const contracts = useSelector((state: RootState) => state.contracts.data);
     const loading = useSelector((state: RootState) => state.contracts.loading);
@@ -29,6 +31,9 @@ const Table = () => {
                 throw new Error('Erro ao obter os contratos');
             }
             const data: Contract[] = await response.json();
+
+            setAllContracts(data);
+
             dispatch(fetchContractsSuccess(data));
         } catch (error) {
             dispatch(fetchContractsFailure((error as Error).message));
@@ -45,14 +50,38 @@ const Table = () => {
         setCurrentPage(currentPage + 1);
     }
 
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    }
+
+    const filteredContracts = allContracts.filter(contract => {
+        const searchData = Object.values(contract).join('').toLowerCase();
+        return searchData.includes(searchTerm.toLowerCase());
+    });
+
+    const toggleSortOrder = () => {
+        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        const sortedContracts = [...allContracts];
+        sortedContracts.sort((a, b) => {
+            if (sortOrder === 'asc') {
+                return b.vlTotal - a.vlTotal;
+            } else {
+                return a.vlTotal - b.vlTotal;
+            }
+        });
+        setAllContracts(sortedContracts);
+    };
+
     return (
         <div>
+            <h2>Pesquise por página</h2>
+            <input type="text" value={searchTerm} onChange={handleSearch} />
             {loading && <div>Carregando...</div>}
             {error && <div>Ocorreu um erro: {error}</div>}
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>ID <button onClick={toggleSortOrder}>{sortOrder === 'asc' ? '↓' : '↑'}</button></th>
                         <th>Número da Instituição</th>
                         <th>Número da Agência</th>
                         <th>Código do Cliente</th>
@@ -83,7 +112,7 @@ const Table = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {contracts.map(contract => {
+                    {filteredContracts.map(contract => {
                         checkConsistency(contract); 
                         return (
                             <tr key={contract.id}>
