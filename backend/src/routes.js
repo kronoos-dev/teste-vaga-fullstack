@@ -9,5 +9,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/upload", uploadFileMiddleware, fileController.store);
+router.get("/finances", fileController.index);
 
 export default router;
