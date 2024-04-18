@@ -89,7 +89,7 @@ const Table = () => {
                             <td>{contract.nmClient}</td>
                             <td>{contract.nrCpfCnpj}</td>
                             <td>{contract.nrContrat}</td>
-                            <td>{contract.dtContrato}</td>
+                            <td>{contract.dtContrato && contract.dtContrato.slice(0, 10)}</td>
                             <td>{contract.qtPrestacoes}</td> 
                             <td>{formatCurrency(contract.vlTotal)}</td>
                             <td>{contract.cdProduto}</td> 
@@ -100,7 +100,7 @@ const Table = () => {
                             <td>{contract.nrPresta}</td>
                             <td>{contract.tpPresta}</td>
                             <td>{contract.nrSeqPre}</td>
-                            <td>{contract.dtVctPre}</td>
+                            <td>{contract.dtVctPre && contract.dtVctPre.slice(0, 10)}</td>
                             <td>{formatCurrency(contract.vlPresta)}</td>
                             <td>{formatCurrency(contract.vlMora)}</td>
                             <td>{formatCurrency(contract.vlMulta)}</td>
