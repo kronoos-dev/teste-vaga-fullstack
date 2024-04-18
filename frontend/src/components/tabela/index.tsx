@@ -6,6 +6,7 @@ import { Contract } from '../../types';
 import { formatCurrency } from '../../utils/moeda/index';
 import { validateCpfCnpj } from '../../utils/cpfCnpj/index';
 import { checkConsistency } from '../../utils/calculo/index';
+import { fetchData } from '../../utils/api';
 
 const Table = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -20,25 +21,9 @@ const Table = () => {
     const error = useSelector((state: RootState) => state.contracts.error);
 
     useEffect(() => {
-        fetchData();
+        fetchData(dispatch, currentPage, pageSize, setAllContracts); 
     }, [currentPage, pageSize]);
 
-    const fetchData = async () => {
-        dispatch(fetchContractsStart());
-        try {
-            const response = await fetch(`http://localhost:3000?page=${currentPage}&pageSize=${pageSize}`);
-            if (!response.ok) {
-                throw new Error('Erro ao obter os contratos');
-            }
-            const data: Contract[] = await response.json();
-
-            setAllContracts(data);
-
-            dispatch(fetchContractsSuccess(data));
-        } catch (error) {
-            dispatch(fetchContractsFailure((error as Error).message));
-        }
-    };
 
     const goToPreviousPage = () => {
         if (currentPage > 1) {
