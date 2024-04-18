@@ -1,0 +1,15 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: userkronoos
+      POSTGRES_PASSWORD: passwordkronoos
+      POSTGRES_DB: dbkronoos
+    volumes:
+      - dbkronoos:/var/lib/postgresql/data
+
+volumes:
+  dbkronoos:
