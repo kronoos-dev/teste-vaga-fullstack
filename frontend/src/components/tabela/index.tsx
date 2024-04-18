@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchContractsStart, fetchContractsSuccess, fetchContractsFailure } from '../../store/contractsSlice';
 import { RootState, AppDispatch } from '../../store/index';
 import { Contract } from '../../types';
+import { formatCurrency } from '../../utils/moeda/index';
 
 const Table = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -90,7 +91,7 @@ const Table = () => {
                             <td>{contract.nrContrat}</td>
                             <td>{contract.dtContrato}</td>
                             <td>{contract.qtPrestacoes}</td> 
-                            <td>{contract.vlTotal}</td>
+                            <td>{formatCurrency(contract.vlTotal)}</td>
                             <td>{contract.cdProduto}</td> 
                             <td>{contract.dsProduto}</td>
                             <td>{contract.cdCarteira}</td>
@@ -100,13 +101,13 @@ const Table = () => {
                             <td>{contract.tpPresta}</td>
                             <td>{contract.nrSeqPre}</td>
                             <td>{contract.dtVctPre}</td>
-                            <td>{contract.vlPresta}</td>
-                            <td>{contract.vlMora}</td>
-                            <td>{contract.vlMulta}</td>
-                            <td>{contract.vlOutAcr}</td>
-                            <td>{contract.vlIof}</td>
-                            <td>{contract.vlDescon}</td>
-                            <td>{contract.vlAtual}</td>
+                            <td>{formatCurrency(contract.vlPresta)}</td>
+                            <td>{formatCurrency(contract.vlMora)}</td>
+                            <td>{formatCurrency(contract.vlMulta)}</td>
+                            <td>{formatCurrency(contract.vlOutAcr)}</td>
+                            <td>{formatCurrency(contract.vlIof)}</td>
+                            <td>{formatCurrency(contract.vlDescon)}</td>
+                            <td>{formatCurrency(contract.vlAtual)}</td>
                             <td>{contract.idSituac}</td>
                             <td>{contract.idSitVen}</td> 
                         </tr>
