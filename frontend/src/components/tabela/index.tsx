@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchContractsStart, fetchContractsSuccess, fetchContractsFailure } from '../../store/contractsSlice';
 import { RootState, AppDispatch } from '../../store/index';
 import { Contract } from '../../types';
 import { formatCurrency } from '../../utils/moeda/index';
 import { validateCpfCnpj } from '../../utils/cpfCnpj/index';
 import { checkConsistency } from '../../utils/calculo/index';
 import { fetchData } from '../../utils/api';
+import { 
+    goToPreviousPage, 
+    goToNextPage, 
+    handleSearch, 
+    filterContracts, 
+    toggleSortOrder 
+} from '../../utils/sorting&filter/index';
 
 const Table = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -16,7 +22,6 @@ const Table = () => {
     const [allContracts, setAllContracts] = useState<Contract[]>([]);
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
     
-    const contracts = useSelector((state: RootState) => state.contracts.data);
     const loading = useSelector((state: RootState) => state.contracts.loading);
     const error = useSelector((state: RootState) => state.contracts.error);
 
@@ -25,48 +30,20 @@ const Table = () => {
     }, [currentPage, pageSize]);
 
 
-    const goToPreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    }
-
-    const goToNextPage = () => {
-        setCurrentPage(currentPage + 1);
-    }
-
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value);
-    }
-
-    const filteredContracts = allContracts.filter(contract => {
-        const searchData = Object.values(contract).join('').toLowerCase();
-        return searchData.includes(searchTerm.toLowerCase());
-    });
-
-    const toggleSortOrder = () => {
-        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-        const sortedContracts = [...allContracts];
-        sortedContracts.sort((a, b) => {
-            if (sortOrder === 'asc') {
-                return b.vlTotal - a.vlTotal;
-            } else {
-                return a.vlTotal - b.vlTotal;
-            }
-        });
-        setAllContracts(sortedContracts);
-    };
+    const filteredContracts = filterContracts(allContracts, searchTerm);
 
     return (
         <div>
             <h2>Pesquise por página</h2>
-            <input type="text" value={searchTerm} onChange={handleSearch} />
+            <input type="text" value={searchTerm} onChange={(event) => handleSearch(event, setSearchTerm)} />
             {loading && <div>Carregando...</div>}
             {error && <div>Ocorreu um erro: {error}</div>}
             <table>
                 <thead>
                     <tr>
-                        <th>ID <button onClick={toggleSortOrder}>{sortOrder === 'asc' ? '↓' : '↑'}</button></th>
+                    <th>ID <button onClick={() => toggleSortOrder(sortOrder, setSortOrder, allContracts, setAllContracts)}>
+                        {sortOrder === 'asc' ? '↓' : '↑'}
+                    </button></th>
                         <th>Número da Instituição</th>
                         <th>Número da Agência</th>
                         <th>Código do Cliente</th>
@@ -134,8 +111,8 @@ const Table = () => {
                     })}
                 </tbody>
             </table>
-            <button onClick={goToPreviousPage} disabled={currentPage === 1}>Anterior</button>
-            <button onClick={goToNextPage}>Próxima</button>
+            <button onClick={() => goToPreviousPage(currentPage, setCurrentPage)} disabled={currentPage === 1}>Anterior</button>
+            <button onClick={() => goToNextPage(currentPage, setCurrentPage)}>Próxima</button>
         </div>
     );
 };

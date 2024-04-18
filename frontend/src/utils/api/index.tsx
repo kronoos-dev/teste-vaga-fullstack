@@ -1,4 +1,3 @@
-// api.js
 import { AppDispatch } from '@/store';
 import  { fetchContractsStart, fetchContractsSuccess, fetchContractsFailure }  from '../../store/contractsSlice';
 import { Contract } from '../../types';
