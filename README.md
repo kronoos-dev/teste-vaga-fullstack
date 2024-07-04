@@ -26,6 +26,7 @@ Você foi designado para desenvolver uma aplicação full stack para lidar com g
 - Dividiremos o valor de vlTotal pela quantidade de prestações (qtPrestacoes).
 - Verificaremos se o resultado dessa divisão é igual ao valor de vlPresta para cada prestação, garantindo que os cálculos estejam corretos e consistentes.
 - Para chegar a um valor aproximado, devera converter o valor total para um numero inteiro, ignorando as dezenas quebradas, e calculando a data de pagamento para verificar se existe juros acumulado, e o valor de mora, caso o valor do movimento(vlMovimento) seja maior que o valor do pagamento (vlPag), devera construir uma trataviva adequada dizendo que o pagamento está inconsistente no frontend.
+- Retorne um boolean se o valor calculado é igual ao valor da parcela.
 
 ## Conversão de Datas para o Tipo Date
 
@@ -80,38 +81,6 @@ Você foi designado para desenvolver uma aplicação full stack para lidar com g
 
 6. *Tratamento de CSV:*
    - Implemente uma lógica para ler, tratar e manipular dados provenientes de um CSV mal formatado.
-
-## Opcionais (Pontos Extras)
-
-1. *Conhecimento em Flatbuffer:*
-   - Demonstre conhecimento em Flatbuffer para otimizar a serialização e desserialização de dados.
-
-2. *Testes Unitários e Automatizados:*
-   - Implemente testes unitários para o frontend e o backend.
-   - Utilize ferramentas como Jest, Testing Library, Mocha, etc.
-
-3. *Conteinerização:*
-   - Utilize Docker para conteinerizar a aplicação.
-
-4. *Orquestração de Containers:*
-   - Utilize Kubernetes para orquestrar os containers.
-
-5. *Integração Contínua:*
-   - Configure integração contínua com Jenkins.
-
-6. *Typescript:*
-   - Utilize TypeScript para aumentar a segurança e clareza do código.
-
-7. *N8n:*
-   - Integre o N8n para automação de fluxos de trabalho.
-
-8. *API Gateway:*
-   - Configure um API Gateway para gerenciar a comunicação entre frontend e backend.
-
-9. *Banco de Dados NoSQL - Opcional:*
-   - Utilize Neo4j ou Cassandra como banco de dados NoSQL.
-
-10. *Tenha conhecimento em Neo4j em geral*
 
 ---
 
