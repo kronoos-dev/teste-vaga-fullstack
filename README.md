@@ -1,5 +1,7 @@
 # Teste Prático para Desenvolvedor Full Stack Kronoos
 
+Você foi designado para desenvolver uma aplicação que deve lidar com grandes volumes de dados. Você deve rodar as seguintes validações e tratativas para cada um dos dados do arquivo e mostrar um retorno ao concluir a rotina. A aplicação será responsável por fornecer uma massa de dados considerável (cerca de 30GB) e deve ser capaz de lidar com dados fornecidos.
+
 *Observação Importante:*
 1. Pedimos extremo comprometimento com o teste, e utilizamos IA para validar se os testes foram gerados por alguma IA (ChatGPT, LhamaGPT, Bard, Jasper, entre outras). Sua dedicação será crucial para uma avaliação justa.
 2. Pedimos que clonem o repo ou façam um fork para o github pessoal e nos sinalizem quando finalizarem, pois não será possível abrir PR neste repositório do teste.
