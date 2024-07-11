@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "outDir": "build",
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "Node16",
+        "strict": true,
+        "target": "es2022",
+        "module": "Node16", 
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "@src/*": ["./src/*"],
+            "@sdk/*": ["./src/sdk/*"],
+            "@test/*": ["./test/*"]
+        }
+    },
+    "ts-node": {
+        "files": true
+    },
+    "exclude": ["coverage", "eslint.config.mjs", "jest.config.cjs", "prettierrc.cjs"]
+}

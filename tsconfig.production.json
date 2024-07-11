@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "build",
+        "paths": {
+            "@src/*": ["./src/*"],
+            "@sdk/*": ["./src/sdk/*"]
+        }
+    },
+    "exclude": [
+        "coverage",
+        "eslint.config.mjs",
+        "jest.config.cjs",
+        "prettierrc.cjs",
+        "test/**/*.ts",
+        "src/**/__tests__/*.test.ts"
+    ]
+}
