@@ -1,0 +1,32 @@
+name: FSCC Kronoos - Análise Estática
+
+on:
+  push:
+    # Run on to branches when a push is made to a feature branch
+    branches:
+      - "feature/*"
+  pull_request:
+    # Run on to branches with an open PR
+    branches:
+      - "main"
+
+jobs:
+  build:
+    name: Node.js LTS v20 ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      # Install node_modules
+      - run: yarn install --frozen-lockfile
+      # Run code formatting
+      - run: yarn format
+      # Run code linting
+      - run: yarn lint
+      # Run unit tests
+      - run: yarn test
+      # Run build
+      - run: yarn build:validate
