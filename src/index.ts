@@ -10,13 +10,19 @@ import { Logging } from "./sdk/logging";
 import { processCsvFile } from "./csv/processing";
 
 function main(logger: Logging) {
-    const dataFile = (fileName: string) => join(__dirname, `../../${fileName}`);
+    const buildFilePath = (fileName: string) => join(__dirname, `../../${fileName}`);
 
     const {
-        values: { csvfile },
+        values: { inputcsv, outputcsv, reportcsv },
     } = parseArguments();
 
-    if (typeof csvfile === "string") processCsvFile(logger, dataFile(csvfile));
+    const csvPaths = {
+        input: buildFilePath(inputcsv as string),
+        output: buildFilePath(outputcsv as string),
+        report: buildFilePath(reportcsv as string),
+    };
+
+    processCsvFile(logger, csvPaths);
 }
 
 (() => {
