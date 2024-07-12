@@ -1,41 +1,25 @@
 import csv from "csv-parser";
 import fs from "fs";
-import { ZodIssue } from "zod";
 
-import { csvLineSchema } from "../schema";
-import { TCSVLine, TCSVLineData, TCSVLineFieldValidationError } from "./definitions";
+import { processCsvLine, buildCsvOutputLine, buildCsvReportLine } from "./actions";
+import { csvOutputHeaders, csvReportHeaders, TCSVFilePaths, TCSVLineData } from "./definitions";
 import { Logging } from "@sdk/logging";
 
-function mapValidationErrors(issues: ZodIssue[]): TCSVLineFieldValidationError[] {
-    const errors: TCSVLineFieldValidationError[] = [];
+export function processCsvFile(logger: Logging, csvPaths: TCSVFilePaths) {
+    const { input, output, report } = csvPaths;
+    const readStream = fs.createReadStream(input);
+    const outWriteStream = fs.createWriteStream(output);
+    const reportWriteStream = fs.createWriteStream(report);
 
-    for (const issue of issues) {
-        const { code, message, path } = issue;
-
-        errors.push({ code, message, header: path[0] as string });
-    }
-
-    return errors;
-}
-
-function processCsvLine(csvLine: TCSVLine): TCSVLine {
-    const { lineNumber, data } = csvLine;
-    const result = csvLineSchema.safeParse(data);
-
-    return {
-        lineNumber,
-        ...(result.success && { data: result.data }),
-        ...(!result.success && { errors: mapValidationErrors(result.error.issues) }),
-    };
-}
-
-export function processCsvFile(logger: Logging, csvFilePath: string = "") {
     let lineNumber: number = 0,
         invalidLines: number = 0,
         validLines: number = 0;
 
-    const validLinesStream = fs.createWriteStream("valid-lines.txt");
-    const validationReportStream = fs.createWriteStream("validation-report.txt");
+    // Writes the headers' lines on each output file
+    const writeCsvHeaders = (): void => {
+        reportWriteStream.write(`${csvReportHeaders.join(",")}\n`);
+        outWriteStream.write(`${csvOutputHeaders.join(",")}\n`);
+    };
 
     // Callback for the "data" event listener
     const rsDataEventCallback = (data: TCSVLineData): void => {
@@ -46,17 +30,17 @@ export function processCsvFile(logger: Logging, csvFilePath: string = "") {
 
         if (parsedLine.errors) {
             invalidLines += 1;
-            validationReportStream.write(JSON.stringify(parsedLine));
+            reportWriteStream.write(buildCsvReportLine(parsedLine));
         } else {
             validLines += 1;
-            validLinesStream.write(JSON.stringify(parsedLine));
+            outWriteStream.write(buildCsvOutputLine(parsedLine));
         }
     };
 
     // Callback for the "end" event listener
     const rsEndingEventCallback = (): void => {
-        validLinesStream.end();
-        validationReportStream.end();
+        outWriteStream.end();
+        reportWriteStream.end();
 
         logger.info(
             `CSV parsing completed. ${validLines} valid lines. Detected ${invalidLines} errors.`,
@@ -64,5 +48,7 @@ export function processCsvFile(logger: Logging, csvFilePath: string = "") {
         );
     };
 
-    fs.createReadStream(csvFilePath).pipe(csv()).on("data", rsDataEventCallback).on("end", rsEndingEventCallback);
+    writeCsvHeaders();
+
+    readStream.pipe(csv()).on("data", rsDataEventCallback).on("end", rsEndingEventCallback);
 }
