@@ -23,12 +23,21 @@ Esse projeto foi desenvolvido utilizando as seguintes ferramentas:
 
 ## O projeto
 
-Em linhas gerais, o projeto consiste de uma aplicação Node.js, escrita em TypeScript, que realiza a análise de uma arquivo CSV (_comma-separated values_), aplicando validações e formatações específicas em certas categorias de dados (colunas). Desta análise, resultam:
+Em linhas gerais, o projeto consiste de uma aplicação Node.js, escrita em TypeScript, que realiza a análise de uma arquivo CSV (_comma-separated values_), aplicando validações e formatações específicas em certas categorias de dados (colunas).
 
-- Um arquivo de texto, contendo os dados válido do arquivo CSV original, devidamente formatados;
-- Um arquivo de texto, contendo o relatório de validação das linhas do CSV, com as descrições de erros.
+A aplicação é executada, via linha de comando, via Yarn, da seguinte forma:
 
-Na [documentação](./ORIGINAL.md) original do projeto, existem elencados os requisitos funcionais que foram implementados.
+```bash
+yarn start:prod \
+  [-i data.csv | --inputcsv=data.csv] \       # Arquivo CSV a ser analisado
+  [-o output.csv | --outputcsv=output.csv] \  # Opcional. Arquivo CSV contendo as linhas válidas e formatadas
+  [-r report.csv | --reportcsv=report.csv]    # Opcional. Arquivo CSV contendo o relatórios de erros
+```
+
+Desta análise, resultam:
+
+- Um arquivo CSV, por padrão nomeado `output.csv`, contendo os dados válido do arquivo CSV original, devidamente formatados;
+- Um arquivo CSV, por padrão nomeado `report.csv`, contendo o relatório de validação das linhas do CSV, com as descrições de erros.
 
 ## Manipulação
 
@@ -49,10 +58,7 @@ Com as dependências básicas devidamente instaladas, e o projeto clonado localm
 - Execução do código JavaScript em `build`, passando como parâmetro o nome do arquivo CSV. O mesmo deve estar na raíz do projeto:
 
     ```bash
-    yarn start:prod \
-      [-i data.csv | --inputcsv=data.csv] \       # Arquivo CSV a ser analisado
-      [-o output.csv | --outputcsv=output.csv] \  # Opcional. Arquivo CSV contendo as linhas válidas e formatadas
-      [-r report.csv | --reportcsv=report.csv]    # Opcional. Arquivo CSV contendo o relatórios de erros
+    yarn start:prod -i data.csv -o output.csv -r report.csv
     ```
 
 Considerando `data.csv` como arquivo de entrada, ao final da execução desse comando, serão criados os arquivos `output.csv` e `report.csv` na raíz do projeto.
