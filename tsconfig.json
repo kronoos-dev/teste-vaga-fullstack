@@ -12,7 +12,9 @@
         "forceConsistentCasingInFileNames": true,
         "baseUrl": ".",
         "paths": {
-            "@src/*": ["./src/*"],
+            "@src/*": ["./src/*"],            
+            "@arguments/*": ["./src/arguments/*"],
+            "@csv/*": ["./src/csv/*"],
             "@sdk/*": ["./src/sdk/*"],
             "@test/*": ["./test/*"]
         }

@@ -3,8 +3,10 @@
     "compilerOptions": {
         "outDir": "build",
         "paths": {
-            "@src/*": ["./src/*"],
-            "@sdk/*": ["./src/sdk/*"]
+            "@src/*": ["./src/*"],            
+            "@arguments/*": ["./src/arguments/*"],
+            "@csv/*": ["./src/csv/*"],
+            "@sdk/*": ["./src/sdk/*"],
         }
     },
     "exclude": [
