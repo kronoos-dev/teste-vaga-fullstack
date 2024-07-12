@@ -4,6 +4,7 @@ export interface IArgumentOption {
     type: "boolean" | "string";
     short?: string;
     multiple?: boolean;
+    default?: boolean | string;
 }
 
 export type TArgumentOptions = {
@@ -12,9 +13,20 @@ export type TArgumentOptions = {
 
 export function parseArguments() {
     const options: TArgumentOptions = {
-        csvfile: {
+        inputcsv: {
             type: "string",
-            short: "f",
+            short: "i",
+            default: "data.csv",
+        },
+        outputcsv: {
+            type: "string",
+            short: "o",
+            default: "output.csv",
+        },
+        reportcsv: {
+            type: "string",
+            short: "r",
+            default: "report.csv",
         },
     };
 
