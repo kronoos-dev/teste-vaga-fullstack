@@ -103,3 +103,7 @@ build
 
 # TernJS port file
 .tern-port
+
+# Generated CSV files
+output.csv
+report.csv
