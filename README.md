@@ -1,38 +1,79 @@
-# Teste Prático para Desenvolvedor Full Stack Kronoos (Solução de _Guilherme Gonçalves_ - [guligon90](https://www.github.com/guligon90))
+# Teste Prático para Desenvolvedor Full Stack Kronoos
 
 ![Code Analysis](https://github.com/guligon90/teste-vaga-fullstack/actions/workflows/code-analysis.yml/badge.svg)
 
-Você foi designado para desenvolver uma aplicação que deve lidar com grandes volumes de dados. Você deve rodar as seguintes validações e tratativas para cada um dos dados do arquivo e mostrar um retorno ao concluir a rotina. A aplicação será responsável por fornecer uma massa de dados considerável (cerca de 30GB) e deve ser capaz de lidar com dados fornecidos.
+Avaliação técnica para a posição de desenvolvedor full-stack na [Kronoos](https://www.github.com/kronoos-dev).  Solução de _Guilherme Gonçalves_ - [guligon90](https://www.github.com/guligon90)
 
-_Observação Importante:_
+<!-- TOC -->
 
-1. Pedimos extremo comprometimento com o teste, e utilizamos IA para validar se os testes foram gerados por alguma IA (ChatGPT, LhamaGPT, Bard, Jasper, entre outras). Sua dedicação será crucial para uma avaliação justa.
-2. Pedimos que clonem o repo ou façam um fork para o github pessoal e nos sinalizem quando finalizarem, pois não será possível abrir PR neste repositório do teste.
+- [Teste Prático para Desenvolvedor Full Stack Kronoos](#teste-pr%C3%A1tico-para-desenvolvedor-full-stack-kronoos)
+  - [Preliminares](#preliminares)
+  - [O projeto](#o-projeto)
+  - [Manipulação](#manipula%C3%A7%C3%A3o)
 
-## Manipulação de Dados de CSV e Conversão para Array
+<!-- /TOC -->
+## Preliminares
 
-- Os dados são fornecidos em formato CSV.
-- Utilizaremos a biblioteca fs (File System) para ler o arquivo CSV e a biblioteca csv-parser para processar os dados e convertê-los em um array de objetos JavaScript.
+Esse projeto foi desenvolvido utilizando as seguintes ferramentas:
 
-## Conversão de Dados para Moeda Real Brasileira
+- [Node Version Manager - `nvm`](https://github.com/nvm-sh/nvm#installing-and-updating): v2.2.13 ou acima. É recomendado esse gerenciador para a instalação local das seguintes dependências;
+  - [Node.js](https://nodejs.org/dist/v20.11.1/node-v20.11.1.tar.gz): versão LTS (v20.11.1) ou acima;
+  - [Yarn Package Manager - `yarn`](https://yarnpkg.com/getting-started): v1.22.21 ou acima.
 
-- Valores monetários, como vlTotal, vlPresta, vlMora, etc., precisam ser formatados como moeda brasileira (BRL).
-- Utilizaremos a biblioteca intl do JavaScript para formatar os valores numéricos como moeda BRL, incluindo o símbolo de real (R$), separador de milhar e precisão de duas casas decimais.
+## O projeto
 
-## Validação de CPF ou CNPJ
+Em linhas gerais, o projeto consiste de uma aplicação Node.js, escrita em TypeScript, que realiza a análise de uma arquivo CSV (_comma-separated values_), aplicando validações e formatações específicas em certas categorias de dados (colunas). Desta análise, resultam:
 
-- Implementaremos uma função para validar o campo nrCpfCnpj e verificar se ele é um CPF ou CNPJ válido, seguindo as regras de validação apropriadas para cada formato.
-- Parte de todos os CPF e CNPJ sao invalidos, usamos um script para gerar dados fictícios.
+- Um arquivo de texto, contendo os dados válido do arquivo CSV original, devidamente formatados;
+- Um arquivo de texto, contendo o relatório de validação das linhas do CSV, com as descrições de erros.
 
-## Validação de Valor Total e Prestações
+Na [documentação](./ORIGINAL.md) original do projeto, existem elencados os requisitos funcionais que foram implementados.
 
-- Dividiremos o valor de vlTotal pela quantidade de prestações (qtPrestacoes).
-- Verificaremos se o resultado dessa divisão é igual ao valor de vlPresta para cada prestação, garantindo que os cálculos estejam corretos e consistentes.
-- Essa função deve retornar um valor true ou false.
-- Para chegar a um valor aproximado, devera converter o valor total para um numero inteiro, ignorando as dezenas quebradas, e calculando a data de pagamento para verificar se existe juros acumulado, e o valor de mora, caso o valor do movimento(vlMovimento) seja maior que o valor do pagamento (vlPag), devera construir uma trataviva adequada dizendo que o pagamento está inconsistente.
+## Manipulação
 
----
+Com as dependências básicas devidamente instaladas, e o projeto clonado localmente, é hora de conduzir a análise do [CSV](./data.csv) fornecido para testes. Com efeito, a seguinte sequência de comandos do Yarn deve ser executada:
 
-A conclusão bem-sucedida deste teste será avaliada com base na implementação eficiente de conceitos como tratamento de dados em larga escala, comunicação assíncrona, gerenciamento de estado, manipulação de CSV, escolha adequada de tecnologias e boas práticas de desenvolvimento.
+- Instalação de packages Node.js:
 
-Boa sorte!
+    ```bash
+    yarn install
+    ```
+
+- Transpilação da base de código TypeScript (não incluindo testes unitários):
+
+    ```bash
+    yarn build:prod
+    ```
+
+- Execução do código JavaScript em `build`, passando como parâmetro o nome do arquivo CSV. O mesmo deve estar na raíz do projeto:
+
+    ```bash
+    yarn start:prod \
+      [-i data.csv | --inputcsv=data.csv] \       # Arquivo CSV a ser analisado
+      [-o output.csv | --outputcsv=output.csv] \  # Opcional. Arquivo CSV contendo as linhas válidas e formatadas
+      [-r report.csv | --reportcsv=report.csv]    # Opcional. Arquivo CSV contendo o relatórios de erros
+    ```
+
+Considerando `data.csv` como arquivo de entrada, ao final da execução desse comando, serão criados os arquivos `output.csv` e `report.csv` na raíz do projeto.
+
+![csv-analysis-output](https://github.com/user-attachments/assets/27d3f3cb-bbfb-4523-a24c-d85e22286e47)
+
+O conteúdo de `report.csv` será similar à:
+
+```csv
+lineNumber,header,errorCode,errorMessage
+1,nrCpfCnpj,custom,CNPJ ou CPF inválido
+2,nrCpfCnpj,custom,CNPJ ou CPF inválido
+3,nrCpfCnpj,custom,CNPJ ou CPF inválido
+4,nrCpfCnpj,custom,CNPJ ou CPF inválido
+...
+```
+
+Analogamente, o conteúdo de `output.csv` será similar à:
+
+```csv
+nrInst,nrAgencia,cdClient,nmClient,nrCpfCnpj,nrContrato,dtContrato,qtPrestacoes,vlTotal,cdProduto,dsProduto,cdCarteira,dsCarteira,nrProposta,nrPresta,tpPresta,nrSeqPre,dtVctPre,vlPresta,vlMora,vlMulta,vlOutAcr,vlIof,vlDescon,vlAtual,idSituac,idSitVen
+1898,15,38194,CLIENTE 244,79135538473,424541,20220906,5,"R$ 73.713,27",821,CDC PESSOA JURIDICA,3,CRÉDITO DIRETO AO CONSUMIDOR,135355,2,Original,0,20220825,"R$ 37.525,92","R$ 49.695,96","R$ 40.513,07","R$ 0,00","R$ 0,00","R$ 0,00","R$ 127.734,95",Aberta,Vencida
+1898,15,38194,CLIENTE 244,79135538473,424541,20220906,5,"R$ 73.713,27",821,CDC PESSOA JURIDICA,3,CRÉDITO DIRETO AO CONSUMIDOR,135355,3,Original,0,20220726,"R$ 57.691,97","R$ 72.862,34","R$ 42.427,50","R$ 0,00","R$ 0,00","R$ 0,00","R$ 172.981,81",Aberta,Vencida
+...
+```
