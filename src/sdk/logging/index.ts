@@ -1,49 +1,57 @@
 "use strict";
 
-import * as winston from "winston";
+import { winston, levels, level, colors, TLogger } from "./definitions";
 
-export const levels = {
-    error: 0,
-    warn: 1,
-    info: 2,
-    http: 3,
-    debug: 4,
-};
+export class Logging {
+    private _logger: TLogger;
 
-export const level = (): string => {
-    const env = process.env.NODE_ENV || "development";
-    const isDevelopment = env === "development";
+    constructor(moduleName: string) {
+        winston.addColors(colors);
+        this._logger = Logging.buildLogger(moduleName);
+    }
 
-    return isDevelopment ? "debug" : "warn";
-};
+    private static buildLogger(moduleName: string): TLogger {
+        const format = winston.format.combine(
+            winston.format.label({ label: moduleName }),
+            winston.format.colorize({ all: true }),
+            winston.format.label({ label: moduleName }),
+            winston.format.timestamp({ format: "YYYY-MM-DD HH:MM:SS" }),
+            winston.format.printf((info) => {
+                return `${info.timestamp} - ${info.label} - ${info.level} - ${info.message}`;
+            }),
+        );
 
-export const colors = {
-    error: "red",
-    warn: "yellow",
-    info: "green",
-    http: "magenta",
-    debug: "gray",
-};
+        const transports = [new winston.transports.Console({})];
 
-winston.addColors(colors);
+        return winston.createLogger({
+            level: level(),
+            levels,
+            format,
+            transports,
+        });
+    }
 
-export const Logger = (moduleName: string): winston.Logger => {
-    const format = winston.format.combine(
-        winston.format.label({ label: moduleName }),
-        winston.format.colorize({ all: true }),
-        winston.format.label({ label: moduleName }),
-        winston.format.timestamp({ format: "YYYY-MM-DD HH:MM:SS" }),
-        winston.format.printf((info) => {
-            return `${info.timestamp} - ${info.label} - ${info.level} - ${info.message}`;
-        }),
-    );
+    public getInstance(): TLogger {
+        return this._logger;
+    }
 
-    const transports = [new winston.transports.Console({})];
+    public warn(message: string, context?: string, callback?: winston.LogCallback): TLogger {
+        return this._logger.warn(`@${context}: ${message}`, callback);
+    }
 
-    return winston.createLogger({
-        level: level(),
-        levels,
-        format,
-        transports,
-    });
-};
+    public info(message: string, context?: string, ...meta: unknown[]): TLogger {
+        return this._logger.info(`@${context}: ${message}`, ...meta);
+    }
+
+    public debug(message: string, context?: string, ...meta: unknown[]): TLogger {
+        return this._logger.debug(`@${context}: ${message}`, ...meta);
+    }
+
+    public error(message: string, context?: string, ...meta: unknown[]): TLogger {
+        return this._logger.error(`@${context}: ${message}`, ...meta);
+    }
+
+    public http(message: string, context?: string, ...meta: unknown[]): TLogger {
+        return this._logger.http(`@${context}: ${message}`, ...meta);
+    }
+}
