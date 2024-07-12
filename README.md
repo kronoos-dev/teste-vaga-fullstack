@@ -2,7 +2,7 @@
 
 ![Code Analysis](https://github.com/guligon90/teste-vaga-fullstack/actions/workflows/code-analysis.yml/badge.svg)
 
-Avaliação técnica para a posição de desenvolvedor full-stack na [Kronoos](https://www.github.com/kronoos-dev).  Solução de _Guilherme Gonçalves_ - [guligon90](https://www.github.com/guligon90)
+Avaliação técnica para a posição de desenvolvedor full-stack na [Kronoos](https://www.github.com/kronoos-dev). Solução de _Guilherme Gonçalves_ - [guligon90](https://www.github.com/guligon90)
 
 <!-- TOC -->
 
@@ -12,6 +12,7 @@ Avaliação técnica para a posição de desenvolvedor full-stack na [Kronoos](h
   - [Manipulação](#manipula%C3%A7%C3%A3o)
 
 <!-- /TOC -->
+
 ## Preliminares
 
 Esse projeto foi desenvolvido utilizando as seguintes ferramentas:
