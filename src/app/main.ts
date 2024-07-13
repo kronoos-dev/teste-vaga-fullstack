@@ -3,7 +3,7 @@ import fs from "fs";
 
 import config from "@app/config";
 import { processCsvFilePipeline, TCSVFilePaths, TCSVProcessingParams } from "@csv/processing";
-import { parseArguments, TParsedResults } from "@src/arguments";
+import { buildHelpMessage, parseArguments, TParsedResults } from "@src/arguments";
 import { Logging } from "@sdk/logging";
 import { ValidationError } from "@sdk/exceptions";
 import { toBoolean } from "@sdk/parsing";
@@ -68,6 +68,11 @@ export function main(logger: Logging): void {
     const { parsedArgs, errors } = parseArguments();
 
     if (errors && !parsedArgs) throw new ValidationError(errors);
+
+    if (toBoolean(parsedArgs?.values.help)) {
+        logger.info(buildHelpMessage(), main.name);
+        return;
+    }
 
     const { csvPaths, processingParams } = extractPipelineInputParams(parsedArgs!);
 

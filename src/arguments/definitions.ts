@@ -5,13 +5,13 @@ export const defaultArgOptions: TArgumentOptions = {
         type: "boolean",
         short: "d",
         default: false,
-        description: "Optional. Enables debugging messages during the execution of the CSV analysis pipeline.",
+        description: "Enables debugging messages during the execution of the CSV analysis pipeline.",
     },
     statistics: {
         type: "boolean",
         short: "S",
         default: true,
-        description: "Optional. Enables exporting of relevant statistical data concerning the CSV analysis.",
+        description: "Enables exporting of relevant statistical data concerning the CSV analysis.",
     },
     inputcsv: {
         type: "string",
@@ -36,6 +36,11 @@ export const defaultArgOptions: TArgumentOptions = {
         short: "s",
         default: "statistics.csv",
         description: "Name of the output CSV file, containing relevant statistical data related to the analysis.",
+    },
+    help: {
+        type: "boolean",
+        short: "h",
+        description: "Shows helpful information regarding this program's usage.",
     },
 };
 
