@@ -1,4 +1,4 @@
-# Teste Prático para Desenvolvedor Full Stack Kronoos
+# FSCC Kronoos
 
 ![Code Analysis](https://github.com/guligon90/teste-vaga-fullstack/actions/workflows/code-analysis.yml/badge.svg)
 
