@@ -105,5 +105,4 @@ build
 .tern-port
 
 # Generated CSV files
-output.csv
-report.csv
+csv/output/
