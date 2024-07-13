@@ -37,12 +37,13 @@ A aplicação é executada, via linha de comando, via Yarn, da seguinte forma:
 
 ```bash
 yarn start:prod \
-  [-d | --debug ] \                             # Opcional. Flag que ativa mensagens de depuração da pipeline de análise do CSV.
-  [-S | --statistics ] \                        # Opcional. Flag que ativa a exportação da estatísticas de análise em um CSV dedicado.
-  [-i data.csv | --inputcsv=data.csv] \         # Nome do arquivo CSV a ser analisado.
-  [-o output.csv | --outputcsv=output.csv] \    # Opcional. Nome do arquivo CSV contendo as linhas válidas e formatadas.
-  [-r report.csv | --reportcsv=report.csv] \    # Opcional. Nome do arquivo CSV contendo o relatórios de erros.
-  [-s statistics.csv | --stats=statistics.csv]  # Opcional. Nome do arquivo CSV contendo as estatísticas da análise do arquivo original.
+  [ -d | --debug ] \                              # Opcional. Flag que ativa mensagens de depuração da pipeline de análise do CSV.
+  [ -S | --statistics ] \                         # Opcional. Flag que ativa a exportação da estatísticas de análise em um CSV dedicado.
+  [ -h | --help ] \                               # Opcional. Documentação dos argumentos e utilização do programa em linha de comando.
+  [ -i data.csv | --inputcsv=data.csv ] \         # Nome do arquivo CSV a ser analisado.
+  [ -o output.csv | --outputcsv=output.csv ] \    # Opcional. Nome do arquivo CSV contendo as linhas válidas e formatadas.
+  [ -r report.csv | --reportcsv=report.csv ] \    # Opcional. Nome do arquivo CSV contendo o relatórios de erros.
+  [ -s statistics.csv | --stats=statistics.csv ]  # Opcional. Nome do arquivo CSV contendo as estatísticas da análise do arquivo original.  
 ```
 
 Ao ser executado, o programa verifica, na raíz do projeto, se existe já criada a seguinte estrutura de pastas:
