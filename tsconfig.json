@@ -13,6 +13,7 @@
         "baseUrl": ".",
         "paths": {
             "@src/*": ["./src/*"],            
+            "@app/*": ["./src/app/*"],
             "@arguments/*": ["./src/arguments/*"],
             "@csv/*": ["./src/csv/*"],
             "@sdk/*": ["./src/sdk/*"],
