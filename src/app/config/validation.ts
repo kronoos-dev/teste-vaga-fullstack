@@ -5,9 +5,19 @@ export function buildEnvMessage(config: IAppConfig): string {
     const {
         application: { environment },
     } = config;
-    const condition = environment !== undefined && typeof environment === "string";
 
-    return condition ? `Running on ${environment.toUpperCase()} environment` : "Environment not set. Things may crash!";
+    const allowedEnvironments = ["development", "dev", "production", "prod", "test"];
+
+    const isValidEnv =
+        environment !== undefined &&
+        typeof environment === "string" &&
+        allowedEnvironments.some((env) => env === environment.trim().toLowerCase());
+
+    console.info("isValidEnd", isValidEnv);
+
+    return isValidEnv
+        ? `Running on ${environment.toUpperCase()} environment`
+        : "Environment not set. Things may crash!";
 }
 
 export function validateAppConfig(config: IAppConfig): string[] {
