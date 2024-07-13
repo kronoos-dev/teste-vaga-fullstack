@@ -2,16 +2,18 @@
 
 import registerModuleAliases from "./modules";
 
+// Must be called before any import that uses module aliases,
+// e.g. import { foo } from "@sdk/foo". Necessary in order
+// for the transpiled JS to work properly.
 registerModuleAliases();
 
-import { declareProcessListeners } from "@app/process";
-
 import { main } from "./app";
+import { declareProcessListeners } from "./app/process";
 import config, { buildEnvMessage, validateAppConfig } from "./app/config";
-import { buildHelpMessage, parseArguments } from "./arguments";
 import { Logging } from "./sdk/logging";
 import { toBoolean } from "./sdk/parsing";
 import { ValidationError } from "./sdk/exceptions";
+import { buildHelpMessage, parseArguments } from "./arguments";
 
 const logger = new Logging(`fscc-kronoos`);
 
