@@ -1,5 +1,6 @@
 import { toBoolean, ALLOWED_FALSE_SYMBOLS, ALLOWED_TRUE_SYMBOLS } from "../boolean";
 import { parseDateString, TDateFormat } from "../datetime";
+import { flattenObject } from "../object";
 
 type TDateStringTestCase = {
     input: string;
@@ -50,4 +51,65 @@ describe("Parsing module unit testing", () => {
             expect(resultStr).toStrictEqual(expectedStr);
         },
     );
+
+    it("Should flatten a deeply nested and fully defined object", () => {
+        const testCase = {
+            a: {
+                b: "red",
+                c: "green",
+            },
+            d: {
+                e: "blue",
+                f: "yellow",
+            },
+            g: "pink",
+            h: {
+                i: {
+                    j: {
+                        k: "gray",
+                        l: "grey",
+                    },
+                },
+            },
+        };
+
+        const expected = {
+            "a.b": "red",
+            "a.c": "green",
+            "d.e": "blue",
+            "d.f": "yellow",
+            g: "pink",
+            "h.i.j.k": "gray",
+            "h.i.j.l": "grey",
+        };
+
+        expect(flattenObject(testCase)).toStrictEqual(expected);
+    });
+
+    it("Should flatten a partially defined nested object", () => {
+        const testCase = {
+            server: { environment: "production", port: undefined },
+            foo: undefined,
+            bar: {
+                keycloak: {
+                    clientId: undefined,
+                    realmName: undefined,
+                    service: { port: 8080 },
+                    jwt: { algorithm: "RS256" },
+                },
+            },
+        };
+
+        const expected = {
+            "server.environment": "production",
+            "server.port": undefined,
+            foo: undefined,
+            "bar.keycloak.clientId": undefined,
+            "bar.keycloak.realmName": undefined,
+            "bar.keycloak.service.port": 8080,
+            "bar.keycloak.jwt.algorithm": "RS256",
+        };
+
+        expect(flattenObject(testCase)).toStrictEqual(expected);
+    });
 });
