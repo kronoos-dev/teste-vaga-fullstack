@@ -13,8 +13,6 @@ export function buildEnvMessage(config: IAppConfig): string {
         typeof environment === "string" &&
         allowedEnvironments.some((env) => env === environment.trim().toLowerCase());
 
-    console.info("isValidEnd", isValidEnv);
-
     return isValidEnv
         ? `Running on ${environment.toUpperCase()} environment`
         : "Environment not set. Things may crash!";
