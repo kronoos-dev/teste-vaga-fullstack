@@ -1,3 +1,5 @@
+import { TCSVProcessingParams } from "./types";
+
 export const csvReportHeaders = ["lineNumber", "header", "errorCode", "errorMessage"];
 
 export const csvOutputHeaders = [
@@ -30,24 +32,7 @@ export const csvOutputHeaders = [
     "idSitVen",
 ];
 
-export type TCSVLineFieldValidationError = {
-    header: string;
-    code: string;
-    message: string;
-};
-
-export type TCSVLineData = {
-    [header: string]: string | number;
-};
-
-export type TCSVLine = {
-    lineNumber: number;
-    errors?: (TCSVLineFieldValidationError | never)[];
-    data?: TCSVLineData;
-};
-
-export type TCSVFilePaths = {
-    input: string;
-    output: string;
-    report: string;
+export const defaultProcessingParams: TCSVProcessingParams = {
+    debug: false,
+    statistics: true,
 };
