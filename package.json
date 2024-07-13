@@ -14,7 +14,7 @@
         "build": "tsc --project tsconfig.json",
         "build:prod": "rimraf build && tsc --project tsconfig.production.json",
         "build:validate": "tsc --project tsconfig.json --noEmit",
-        "format": "prettier --write --config .prettierrc.cjs '**/*.{cjs,js,ts,jsx,tsx,json,css,scss,md}'",
+        "format": "prettier --write --config .prettierrc.cjs '**/*.{cjs,js,ts,jsx,tsx,json,css,scss}'",
         "lint": "eslint \"{src,test}/**/*.{js,ts}\"",
         "lint:fix": "eslint \"{src,test}/**/*.{js,ts}\" --fix",
         "prebuild": "rimraf build",
