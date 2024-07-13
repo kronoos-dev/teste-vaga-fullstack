@@ -3,9 +3,8 @@ import fs from "fs";
 
 import config from "@app/config";
 import { processCsvFilePipeline, TCSVFilePaths, TCSVProcessingParams } from "@csv/processing";
-import { buildHelpMessage, parseArguments, TParsedResults } from "@src/arguments";
+import { TParsedResults } from "@src/arguments";
 import { Logging } from "@sdk/logging";
-import { ValidationError } from "@sdk/exceptions";
 import { toBoolean } from "@sdk/parsing";
 
 type TCSVFilePathType = "input" | "output";
@@ -62,19 +61,10 @@ function checkCsvDirStructure(logger: Logging): void {
     }
 }
 
-export function main(logger: Logging): void {
+export function main(logger: Logging, parsedArgs: TParsedResults): void {
     checkCsvDirStructure(logger);
 
-    const { parsedArgs, errors } = parseArguments();
-
-    if (errors && !parsedArgs) throw new ValidationError(errors);
-
-    if (toBoolean(parsedArgs?.values.help)) {
-        logger.info(buildHelpMessage(), main.name);
-        return;
-    }
-
-    const { csvPaths, processingParams } = extractPipelineInputParams(parsedArgs!);
+    const { csvPaths, processingParams } = extractPipelineInputParams(parsedArgs);
 
     if (!fs.existsSync(csvPaths.input)) {
         logger.warn(`Input CSV file ${csvPaths.input} does not exist. Check the input folder.`, main.name);
