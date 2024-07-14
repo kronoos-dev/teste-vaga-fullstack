@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require('path');
 const csv = require("csv-parser");
+const moment = require('moment');
 
 const formatToBRL = require("../utils/formatCurrency");
 const { parseDate } = require("../utils/parseDate");
@@ -10,7 +11,7 @@ const {
   validateCNPJ,
 } = require("../utils/documentValidator");
 
-function validateInstallments(vlTotal, qtPrestacoes, vlPresta) {
+function validateInstallments(vlTotal, qtPrestacoes, vlPresta, dtVctPre, vlMulta, vlMora) {
   if (!vlTotal || !qtPrestacoes || !vlPresta) {
     return false;
   }
@@ -19,8 +20,22 @@ function validateInstallments(vlTotal, qtPrestacoes, vlPresta) {
 
   const roundedCalculatedPresta = Math.round(calculatedPresta * 100) / 100;
   const roundedVlPresta = Math.round(vlPresta * 100) / 100;
+  const roundedVlMulta = Math.round(vlMulta * 100) / 100;
 
-  return roundedCalculatedPresta === roundedVlPresta;
+  const today = moment();
+  const dtVctPreFormated = moment(dtVctPre);
+
+  let vlPrestaWithMult = today.isAfter(dtVctPreFormated, 'day') && roundedCalculatedPresta + roundedVlMulta;
+
+  if (vlPrestaWithMult) {
+    return formatToBRL(vlPrestaWithMult)
+  }
+
+  if (vlMora > vlPrestaWithMult || vlMora > roundedVlPresta) {
+    return "pagamento está inconsistente!"
+  }
+
+  return formatToBRL(roundedCalculatedPresta === roundedVlPresta);
 }
 
 function checkTypeDocument(doc) {
@@ -64,7 +79,10 @@ function formatMonetaryValues({
     validateInstallments: validateInstallments(
       parseFloat(vlTotal),
       parseInt(qtPrestacoes, 10),
-      parseFloat(vlPresta)
+      parseFloat(vlPresta),
+      parseDate(dtVctPre),
+      parseFloat(vlMulta),
+      parseFloat(vlMora)
     ),
     dtContrato: parseDate(dtContrato),
     dtVctPre: parseDate(dtVctPre),
