@@ -8,7 +8,7 @@ Avaliação técnica para a posição de desenvolvedor full-stack na [Kronoos](h
 
 <!-- TOC -->
 
-- [Teste Prático para Desenvolvedor Full Stack Kronoos](#teste-pr%C3%A1tico-para-desenvolvedor-full-stack-kronoos)
+- [FSCC Kronoos](#fscc-kronoos)
   - [Sumário](#sum%C3%A1rio)
   - [Preliminares](#preliminares)
   - [O projeto](#o-projeto)
