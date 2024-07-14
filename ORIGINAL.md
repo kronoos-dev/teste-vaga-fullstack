@@ -1,5 +1,22 @@
 # Teste Prático para Desenvolvedor Full Stack Kronoos
 
+## Índice
+
+<!-- TOC -->
+
+- [Teste Prático para Desenvolvedor Full Stack Kronoos](#teste-pr%C3%A1tico-para-desenvolvedor-full-stack-kronoos)
+  - [Índice](#%C3%ADndice)
+  - [Introdução](#introdu%C3%A7%C3%A3o)
+  - [Manipulação de Dados de CSV e Conversão para Array](#manipula%C3%A7%C3%A3o-de-dados-de-csv-e-convers%C3%A3o-para-array)
+  - [Conversão de Dados para Moeda Real Brasileira](#convers%C3%A3o-de-dados-para-moeda-real-brasileira)
+  - [Validação de CPF ou CNPJ](#valida%C3%A7%C3%A3o-de-cpf-ou-cnpj)
+  - [Validação de Valor Total e Prestações](#valida%C3%A7%C3%A3o-de-valor-total-e-presta%C3%A7%C3%B5es)
+  - [O que fazer agora?](#o-que-fazer-agora)
+
+<!-- /TOC -->
+
+## Introdução
+
 Você foi designado para desenvolver uma aplicação que deve lidar com grandes volumes de dados. Você deve rodar as seguintes validações e tratativas para cada um dos dados do arquivo e mostrar um retorno ao concluir a rotina. A aplicação será responsável por fornecer uma massa de dados considerável (cerca de 30GB) e deve ser capaz de lidar com dados fornecidos.
 
 _Observação Importante:_
@@ -34,3 +51,10 @@ _Observação Importante:_
 A conclusão bem-sucedida deste teste será avaliada com base na implementação eficiente de conceitos como tratamento de dados em larga escala, comunicação assíncrona, gerenciamento de estado, manipulação de CSV, escolha adequada de tecnologias e boas práticas de desenvolvimento.
 
 Boa sorte!
+
+---
+
+## O que fazer agora?
+
+- [Voltar para o índice](#%C3%ADndice)
+- [Documentação inicial](./README.md)

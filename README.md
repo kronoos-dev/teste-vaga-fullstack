@@ -4,18 +4,19 @@
 
 Avaliação técnica para a posição de desenvolvedor full-stack na [Kronoos](https://www.github.com/kronoos-dev). Solução de _Guilherme Gonçalves_ - [guligon90](https://www.github.com/guligon90)
 
-## Sumário
+## Índice
 
 <!-- TOC -->
 
 - [FSCC Kronoos](#fscc-kronoos)
-  - [Sumário](#sum%C3%A1rio)
+  - [Índice](#%C3%ADndice)
   - [Preliminares](#preliminares)
   - [O projeto](#o-projeto)
     - [Entradas](#entradas)
     - [Configuração](#configura%C3%A7%C3%A3o)
     - [Resultados](#resultados)
   - [Manipulação](#manipula%C3%A7%C3%A3o)
+  - [O que fazer agora?](#o-que-fazer-agora)
 
 <!-- /TOC -->
 
@@ -169,4 +170,7 @@ totalLinesProcessed,totalInvalidLines,totalValidLines,outputCsvPath,reportCsvPat
 
 ---
 
-[Voltar para índice](#sum%C3%A1rio)
+## O que fazer agora?
+
+- [Voltar para o índice](#%C3%ADndice)
+- [Documentação original](./ORIGINAL.md)
