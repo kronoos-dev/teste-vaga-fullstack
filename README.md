@@ -95,9 +95,11 @@ Da análise do CSV de entrada, resultam:
 | `totalLinesProcessed` | Número total de linhas processadas                              | `number` |
 | `totalInvalidLines`   | Número total de linhas contendo erros em alguns de seus campos  | `number` |
 | `totalValidLines`     | Número total de linhas sem nenhuma inconsistência               | `number` |
-| `outputCsvPath`       | Caminho completo do arquivo CSV gerado com as linhas válidas    | `string` |
-| `reportCsvPath`       | Caminho completo do arquivo CSV gerado com o relatório de erros | `string` |
-| `statsCsvPath`        | Caminho completo do arquivo CSV gerado com estatísticas         | `string` |
+| `startTimeSecs`       | Tempo em segundos, extraído no início da execução da análise    | `number` |
+| `finishTimeSecs`      | Tempo em segundos, extraído no término da execução da análise   | `number` |
+| `elapsedTimeSecs`     | Tempo em segundos, de duração do processo de análise            | `number` |
+| `invalidLinesRatio`   | Fração normalizada de linhas inválidas no CSV de entrada        | `number` |
+| `validLinesRatio`    | Fração normalizada de linhas inválidas no CSV de entrada         | `number` |
 
 Todos serão criados na pasta `./csv/output`.
 
