@@ -38,10 +38,12 @@ export type TCSVProcessingParams = {
 };
 
 export type TCSVStatistics = {
+    startTimeSecs?: number;
+    finishTimeSecs?: number;
+    elapsedTimeSecs?: number;
     totalLinesProcessed: number;
     totalValidLines: number;
     totalInvalidLines: number;
-    outputCsvPath?: string;
-    reportCsvPath?: string;
-    statsCsvPath?: string;
+    validLinesRatio?: number;
+    invalidLinesRatio?: number;
 };

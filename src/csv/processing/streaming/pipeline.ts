@@ -5,6 +5,7 @@ import { buildFileStreams } from "@csv/processing/actions";
 import { defaultProcessingParams } from "@csv/processing/definitions";
 import { TCSVFilePaths, TCSVProcessingParams, TCSVStatistics } from "@csv/processing/types";
 import { onDataEventCallback, onEndingEventCallback, writeCsvHeaders } from "./callbacks";
+import { parseHrtimeToSeconds } from "@src/sdk/parsing";
 
 export function processCsvFilePipeline(
     logger: Logging,
@@ -23,6 +24,7 @@ export function processCsvFilePipeline(
         totalLinesProcessed: 0,
         totalInvalidLines: 0,
         totalValidLines: 0,
+        startTimeSecs: parseHrtimeToSeconds(process.hrtime()),
     };
 
     if (!debug) logger.info("Processing CSV file. This might take some time...", processCsvFilePipeline.name);
@@ -32,5 +34,5 @@ export function processCsvFilePipeline(
     fileStreams.fsInput
         .pipe(csv())
         .on("data", (data) => onDataEventCallback(data, fileStreams, statsData, logger, debug))
-        .on("end", () => onEndingEventCallback(fileStreams, csvPaths, statsData, logger));
+        .on("end", () => onEndingEventCallback(fileStreams, statsData, logger));
 }

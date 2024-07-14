@@ -1,16 +1,18 @@
 import { buildCsvOutputLine, buildCsvReportLine, processCsvLine } from "@csv/processing/actions";
 import { csvOutputHeaders, csvReportHeaders } from "@csv/processing/definitions";
-import { TCSVFilePaths, TCSVFileStreams, TCSVLineData, TCSVStatistics } from "@csv/processing/types";
+import { TCSVFileStreams, TCSVLineData, TCSVStatistics } from "@csv/processing/types";
 import { Logging } from "@sdk/logging";
+import { Rounding } from "@sdk/numeric";
+import { parseHrtimeToSeconds } from "@sdk/parsing";
 
 function writeStatistics(fileStreams: TCSVFileStreams, statsData: TCSVStatistics, logger: Logging): void {
     logger.info("CSV parsing completed. writing statistics to CSV file...", writeStatistics.name);
 
     const { fsStats } = fileStreams;
 
-    const buildLine = (series: (string | number)[]): string => {
+    const buildLine = (series: (string | number | bigint)[]): string => {
         return series.reduce((acc, rawItem, currIx, arr) => {
-            const item = typeof rawItem === "number" ? rawItem.toString() : rawItem;
+            const item = typeof rawItem === "number" || typeof rawItem === "bigint" ? rawItem.toString() : rawItem;
             acc += currIx < arr.length ? `${item},` : `${item}`;
 
             return acc;
@@ -58,28 +60,28 @@ export function onDataEventCallback(
         );
 }
 
-export function onEndingEventCallback(
-    fileStreams: TCSVFileStreams,
-    csvPaths: TCSVFilePaths,
-    statsData: TCSVStatistics,
-    logger: Logging,
-): void {
-    const { output, report, statistics } = csvPaths;
+export function onEndingEventCallback(fileStreams: TCSVFileStreams, statsData: TCSVStatistics, logger: Logging): void {
     const { fsOutput, fsReport, fsStats } = fileStreams;
+    const r = (v: number, p: number = 7): number => Rounding.roundToNearest(v, p);
 
     fsOutput.end();
     fsReport.end();
 
+    statsData.finishTimeSecs = parseHrtimeToSeconds(process.hrtime());
+    statsData.elapsedTimeSecs = r(statsData.finishTimeSecs - statsData.startTimeSecs!);
+
     if (fsStats) {
         statsData = {
             ...statsData,
-            outputCsvPath: output,
-            reportCsvPath: report,
-            statsCsvPath: statistics,
+            invalidLinesRatio: r(statsData.totalInvalidLines / statsData.totalLinesProcessed),
+            validLinesRatio: r(statsData.totalValidLines / statsData.totalLinesProcessed),
         };
 
         writeStatistics(fileStreams, statsData, logger);
     }
 
-    logger.info("CSV analysis pipeline completed successfully!", onEndingEventCallback.name);
+    logger.info(
+        `CSV analysis pipeline completed successfully! Time elapsed: ${statsData.elapsedTimeSecs} seconds.`,
+        onEndingEventCallback.name,
+    );
 }
