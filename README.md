@@ -33,3 +33,13 @@ Você foi designado para desenvolver uma aplicação que deve lidar com grandes 
 A conclusão bem-sucedida deste teste será avaliada com base na implementação eficiente de conceitos como tratamento de dados em larga escala, comunicação assíncrona, gerenciamento de estado, manipulação de CSV, escolha adequada de tecnologias e boas práticas de desenvolvimento.
 
 Boa sorte!
+
+## Instruções
+
+- Executar o comando na raiz do projeto: npm i ou yarn install
+- Após fazer toda a instalação executar o comando:
+  - npm run start:dev ou yarn start:dev
+
+## Observações
+
+- No ultimo trecho do teste, na qual foi pedido para validar o valor pago considerando a multa e o juros de mora, nao ficou muito claro as instrucoes, pois os campos 'vlMovimento' e 'vlPag' nao existem no arquivo .CSV. Condiderei as informacoes que estavam no proprio arquivo.
