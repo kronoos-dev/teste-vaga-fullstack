@@ -1,3 +1,5 @@
+import { Rounding } from "../numeric";
+
 export type TDateFormat = "DDMMYYYY" | "DDMYYYY" | "DMMYYYY" | "DMYYYY" | "YYYYMMDD" | "YYYYMMD" | "YYYYMDD" | "YYYYMD";
 export interface IExtractedDate {
     year?: number;
@@ -79,4 +81,13 @@ export function parseDateString(dateString: string, format: TDateFormat = "YYYYM
     const cmpsAreValid = isInRange(year!, 1900) && isInRange(month!, 1, 12) && isInRange(day!, 1, 31);
 
     return cmpsAreValid ? new Date(year!, month! - 1, day) : new Date(NaN);
+}
+
+// Using process.hrtime because it is faster and more precise
+// https://gist.github.com/samuelcarreira/dad1f819606b37022703713a16b0fa8b?permalink_comment_id=4451038#gistcomment-4451038
+export function parseHrtimeToSeconds(hrtime: [number, number], precision: number = 2): number {
+    const NS_PER_SEC = 1e9;
+    const seconds = hrtime[0] + hrtime[1] / NS_PER_SEC;
+
+    return Rounding.truncate(seconds, precision);
 }
