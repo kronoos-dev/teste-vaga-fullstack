@@ -100,7 +100,7 @@ Da análise do CSV de entrada, resultam:
 | `finishTimeSecs`      | Tempo em segundos, extraído no término da execução da análise   | `number` |
 | `elapsedTimeSecs`     | Tempo em segundos, de duração do processo de análise            | `number` |
 | `invalidLinesRatio`   | Fração normalizada de linhas inválidas no CSV de entrada        | `number` |
-| `validLinesRatio`    | Fração normalizada de linhas inválidas no CSV de entrada         | `number` |
+| `validLinesRatio`     | Fração normalizada de linhas válidas no CSV de entrada          | `number` |
 
 Todos serão criados na pasta `./csv/output`.
 
