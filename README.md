@@ -4,7 +4,8 @@ Você foi designado para desenvolver uma aplicação que deve lidar com grandes 
 
 *Observação Importante:*
 1. Pedimos extremo comprometimento com o teste, e utilizamos IA para validar se os testes foram gerados por alguma IA (ChatGPT, LhamaGPT, Bard, Jasper, entre outras). Sua dedicação será crucial para uma avaliação justa.
-2. Pedimos que clonem o repo ou façam um fork para o github pessoal e nos sinalizem quando finalizarem, pois não será possível abrir PR neste repositório do teste.
+2. Pedimos que não utilize bibliotecas para efetuar a validação do CPF ou CNPJ. Queremos que você desenvolva o seu próprio algoritmo de validação para que possamos entender qual sua dinâmica de raciocínio.
+3. Pedimos que clonem o repo ou façam um fork para o github pessoal e nos sinalizem quando finalizarem, pois não será possível abrir PR neste repositório do teste.
 
 ## Manipulação de Dados de CSV e Conversão para Array
 
@@ -23,10 +24,8 @@ Você foi designado para desenvolver uma aplicação que deve lidar com grandes 
 
 ## Validação de Valor Total e Prestações
 
-- Dividiremos o valor de vlTotal pela quantidade de prestações (qtPrestacoes).
-- Verificaremos se o resultado dessa divisão é igual ao valor de vlPresta para cada prestação, garantindo que os cálculos estejam corretos e consistentes.
-- Essa função deve retornar um valor true ou false.
-- Para chegar a um valor aproximado, devera converter o valor total para um numero inteiro, ignorando as dezenas quebradas, e calculando a data de pagamento para verificar se existe juros acumulado, e o valor de mora, caso o valor do movimento(vlMovimento) seja maior que o valor do pagamento (vlPag), devera construir uma trataviva adequada dizendo que o pagamento está inconsistente.
+- Dividiremos o valor de `vlTotal` pela quantidade de prestações (`qtPrestacoes`).
+- Verificaremos se o resultado dessa divisão é igual ao valor de `vlPresta` para cada prestação, garantindo que os cálculos estejam corretos e consistentes.
 
 ---
 
