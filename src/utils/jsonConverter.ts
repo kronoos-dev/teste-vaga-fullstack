@@ -6,6 +6,13 @@ import { CsvRow } from '../interfaces/DataTypes';
 const OUTPUT_DIR = path.join(__dirname, '../../output');
 const RECORDS_PER_FILE = 500;
 
+/*
+ * Este arquivo tem o intuito de percorrer a base de dados CSV e converter os dados para JSON, dividindo a base inteira em grupos de 500.
+ * Não foi implementado devido ao tempo. Trouxe de um outro projeto que desenvolvi.
+ *
+ *
+ * */
+
 export async function convertCsvToJson(inputFilePath: string): Promise<void> {
   try {
     if (!fs.existsSync(OUTPUT_DIR)) {
