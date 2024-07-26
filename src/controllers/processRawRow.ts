@@ -6,12 +6,12 @@ import { parseCurrencyBRL } from './parseCurrencyBRL';
 import { validateCpfCnpj } from './validateCpfCnpj';
 import { validateTotalValueAndInstallments } from './validateTotalValueAndInstallments';
 
-export async function processRawRow(row: RawRow): Promise<{
+export function processRawRow(row: RawRow): {
   validCpfCnpj: number;
   invalidCpfCnpj: number;
   validValues: number;
   invalidValues: number;
-}> {
+} {
   // Aplica a validação de CPF/CNPJ à linha atual.
   const isCpfCnpjValid = validateCpfCnpj(row.nrCpfCnpj);
 

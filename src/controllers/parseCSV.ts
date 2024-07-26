@@ -7,10 +7,7 @@ import { processRawRow } from './processRawRow';
 
 type ProcessRawRowReturn = ReturnType<typeof processRawRow>;
 
-type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
-type ProcessRawRowReturnUnpromised = UnwrapPromise<ProcessRawRowReturn>;
-
-interface ParseCsvReturn extends ProcessRawRowReturnUnpromised {
+interface ParseCsvReturn extends ProcessRawRowReturn {
   rowsProcessed: number;
 }
 
@@ -31,7 +28,7 @@ export async function parseCSV(csvFilePath: string): Promise<ParseCsvReturn> {
     fs.createReadStream(csvFilePath)
       .pipe(csvParser())
       .on('data', async (rawRow: RawRow) => {
-        const rawRowResult = await processRawRow(rawRow);
+        const rawRowResult = processRawRow(rawRow);
 
         // Atualiza os resultados acumulados.
         Object.keys(rawRowResult).forEach((key) => {
