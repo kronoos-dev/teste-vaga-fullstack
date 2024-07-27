@@ -1,3 +1,38 @@
+## 🚀 Getting started
+
+- Você precisa instalar [Node.js](https://nodejs.org/en/download/) e [NPM](https://nodejs.org/en/learn/getting-started/an-introduction-to-the-npm-package-manager) ou apenas o [Docker](https://www.docker.com/) para rodar esse projeto.
+
+**Clone o projeto e acesse a pasta**
+
+```bash
+$ git clone git@github.com:guiathayde/kronoos-teste-vaga-fullstack.git && cd kronoos-teste-vaga-fullstack
+```
+
+**Siga os passos abaixo para rodar apenas com o Node.js**
+
+```bash
+# Instale as dependências
+$ npm i
+
+# Rode a função principal para ver os resultados do processamento do data.csv
+$ npm start
+
+# Para rodar os testes
+$ npm test
+```
+
+**Siga os passos abaixo para rodar apenas com o Docker**
+
+```bash
+# Faça a build do container
+$ docker build -t kronoos_test .
+
+# Rode o container criado
+$ docker run kronoos_test
+```
+
+<p align="center">Feito com 💜 por Guilherme Athayde</p>
+
 # Teste Prático para Desenvolvedor Full Stack Kronoos
 
 Você foi designado para desenvolver uma aplicação que deve lidar com grandes volumes de dados. Você deve rodar as seguintes validações e tratativas para cada um dos dados do arquivo e mostrar um retorno ao concluir a rotina. A aplicação será responsável por fornecer uma massa de dados considerável (cerca de 30GB) e deve ser capaz de lidar com dados fornecidos.
