@@ -8,6 +8,8 @@
   },
   "license": "MIT",
   "scripts": {
+    "start:npm": "npm i && npm run dev",
+    "start:yarn": "yarn && yarn dev",
     "dev": "nodemon src/index.ts",
     "begin": "yarn && yarn build",
     "start": "node dist/index.js",
