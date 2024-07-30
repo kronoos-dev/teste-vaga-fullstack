@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "88e3b8f6-6c6c-4fdb-ae7e-1f178ff24f60",
+		"name": "testevaga",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26718280"
+	},
+	"item": [
+		{
+			"name": "convert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Inst</th>\r",
+							"        <th>Agency</th>\r",
+							"        <th>Client Code</th>\r",
+							"        <th>Client Name</th>\r",
+							"        <th>CPF/CNPJ</th>\r",
+							"        <th>Contract Number</th>\r",
+							"        <th>Contract Date</th>\r",
+							"        <th>Installments Quantity</th>\r",
+							"        <th>Total Value</th>\r",
+							"        <th>Product Code</th>\r",
+							"        <th>Product Description</th>\r",
+							"        <th>Wallet Code</th>\r",
+							"        <th>Wallet Description</th>\r",
+							"        <th>Proposal Number</th>\r",
+							"        <th>Installment Number</th>\r",
+							"        <th>Installment Type</th>\r",
+							"        <th>Sequence Number</th>\r",
+							"        <th>Due Date</th>\r",
+							"        <th>Installment Value</th>\r",
+							"        <th>Interest Value</th>\r",
+							"        <th>Fine Value</th>\r",
+							"        <th>Other Charges Value</th>\r",
+							"        <th>IOF Value</th>\r",
+							"        <th>Discount Value</th>\r",
+							"        <th>Current Value</th>\r",
+							"        <th>Situation ID</th>\r",
+							"        <th>Sale Situation ID</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response}}\r",
+							"        <tr>\r",
+							"            <td>{{nrInst}}</td>\r",
+							"            <td>{{nrAgencia}}</td>\r",
+							"            <td>{{cdClient}}</td>\r",
+							"            <td>{{nmClient}}</td>\r",
+							"            <td>{{nrCpfCnpj}}</td>\r",
+							"            <td>{{nrContrato}}</td>\r",
+							"            <td>{{dtContrato}}</td>\r",
+							"            <td>{{qtPrestacoes}}</td>\r",
+							"            <td>{{vlTotal}}</td>\r",
+							"            <td>{{cdProduto}}</td>\r",
+							"            <td>{{dsProduto}}</td>\r",
+							"            <td>{{cdCarteira}}</td>\r",
+							"            <td>{{dsCarteira}}</td>\r",
+							"            <td>{{nrProposta}}</td>\r",
+							"            <td>{{nrPresta}}</td>\r",
+							"            <td>{{tpPresta}}</td>\r",
+							"            <td>{{nrSeqPre}}</td>\r",
+							"            <td>{{dtVctPre}}</td>\r",
+							"            <td>{{vlPresta}}</td>\r",
+							"            <td>{{vlMora}}</td>\r",
+							"            <td>{{vlMulta}}</td>\r",
+							"            <td>{{vlOutAcr}}</td>\r",
+							"            <td>{{vlIof}}</td>\r",
+							"            <td>{{vlDescon}}</td>\r",
+							"            <td>{{vlAtual}}</td>\r",
+							"            <td>{{idSituac}}</td>\r",
+							"            <td>{{idSitVen}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return {response: pm.response.json()}\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csvfile",
+							"type": "file",
+							"src": "/D:/programação/repo/teste-vaga-fullstack/data.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{local}}/convert?page=3&limit=10",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"convert"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "3"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verifyDocument",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csvfile",
+							"type": "file",
+							"src": "/D:/programação/repo/teste-vaga-fullstack/data.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{local}}/verifydocument",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"verifydocument"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verifyTnstallments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csvfile",
+							"type": "file",
+							"src": "/D:/programação/repo/teste-vaga-fullstack/data.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{local}}/verifyTnstallments",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"verifyTnstallments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "init",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:3000"
+		}
+	]
+}
