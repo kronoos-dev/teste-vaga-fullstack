@@ -1,0 +1,21 @@
+{
+    "name": "teste-vaga-fullstack",
+    "description": "Você foi designado para desenvolver uma aplicação que deve lidar com grandes volumes de dados. Você deve rodar as seguintes validações e tratativas para cada um dos dados do arquivo e mostrar um retorno ao concluir a rotina. A aplicação será responsável por fornecer uma massa de dados considerável (cerca de 30GB) e deve ser capaz de lidar com dados fornecidos.",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "vitest",
+        "start": "tsc && node dist/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "typescript": "^5.5.4",
+        "vitest": "^2.0.4"
+    },
+    "dependencies": {
+        "csv-parser": "^3.0.0"
+    }
+}
