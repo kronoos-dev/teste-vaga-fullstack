@@ -29,10 +29,11 @@ Depois de feita a instalação do pacote globalmente você poderá usar o comand
 
 `csvApp generateMockup -f .\data.csv -o .\resultMockup.csv -n 1000000` Gerar um arquivo de exemplo com 1 milhão de linhas. Ele usará o header e a primeira linha do arquivo de origem.
 
-`csvApp -f .\data.csv -o .\result.json` Por fim o comando standard da CLI realiza uma verificação linha a linha de todo o arquivo data.csv e irá gerar como resultado um arquivo result.json que foi tratado conforme solicitado.
+`csvApp -f .\data.csv -o .\result.json` Por fim o comando default da CLI realiza uma verificação linha a linha de todo o arquivo data.csv e irá gerar como resultado um arquivo result.json que foi tratado conforme solicitado.<br/><b>Vale mencionar que ele também gera um objeto locazido ao final do json que mostra a quantidade de parcelas válidas e a quantidade de documentos válidos.</b>
 
 Ex de um objeto inserido dentro de result.json
 ```
+[
   {
     "nrInst": "533",
     "nrAgencia": "32",
@@ -63,7 +64,12 @@ Ex de um objeto inserido dentro de result.json
     "idSitVen": "Vencida",
     "Parcela é Valida": false,
     "CPF/CNPJ é Válido": false
+  },
+  {
+    "validDocuments": "13",
+    "validInstallments": "0"
   }
+]
 ```
 
 ## Sobre a capacidade da aplicação
@@ -101,8 +107,10 @@ Ex de um objeto inserido dentro de result.json
 
 ### Perguntas gerais
 
+- <b>Horas de dedicação</b><br/>8 Horas
+
 - <b>Por que não usar Typescript?</b><br/>Complexidade desnecessária para um MVP de um projeto pequeno.
 
 - <b>Oque a aplicação é capaz de fazer?</b><br/>Como foi mencionado ela é capaz de gerar CSVs de até 1 Bilhão de linhas e ler CSVs de até 7 Milhões de linhas, porém estes não são os limites da aplicação, na verdade esse é o máximo que eu cheguei à testar. Considerando também o real uso dessa aplicação, é possível a alteração da regra de negócio atual. A aplicação tem potêncial de expansão e flexibilidade para outras tratativas de dados e vínculo com bancos de dados por exemplo.
 
-- <b>Essa aplicação pode ser usada em um ambiente real?</b><br />Creio que sim, até onde eu testei a aplicação ela tem consistência nos resultados apresentados e teria sim uma possibilidade de integração num ambiente de trabalho real.
+- <b>Essa aplicação pode ser usada em um ambiente real?</b><br />Creio que sim, até onde eu testei a aplicação tem consistência nos resultados apresentados e teria sim uma possibilidade de integração num ambiente de trabalho real.
