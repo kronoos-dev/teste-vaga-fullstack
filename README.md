@@ -10,11 +10,11 @@ Entre na pasta clonada
 
 Instale as dependências do projeto
 
-`npm i`
+`npm i` || `yarn yarn install`
 
-Instale o próprio projeto como uma dependência global (-g) do NPM
+Instale o próprio projeto como uma dependência global
 
-`npm i -g .`
+`npm i -g .` || `yarn global add .`
 
 <hr>
 
