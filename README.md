@@ -19,6 +19,7 @@ Instale o próprio projeto como uma dependência global (-g) do NPM
 <hr>
 
 Depois de feita a instalação do pacote globalmente você poderá usar o comando csvApp para interagir com a CLI e realizar as ações.
+
 <img src="https://github.com/Heinrick-Senna/teste-vaga-fullstack/blob/main/images/CLI%20Example.png" />
 
 <hr>
