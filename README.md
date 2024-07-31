@@ -30,7 +30,7 @@ Depois de feita a instalação do pacote globalmente você poderá usar o comand
 
 `csvApp generateMockup -f .\data.csv -o .\resultMockup.csv -n 1000000` Gerar um arquivo de exemplo com 1 milhão de linhas. Ele usará o header e a primeira linha do arquivo de origem.
 
-`csvApp -f .\data.csv -o .\result.json` Por fim o comando default da CLI realiza uma verificação linha a linha de todo o arquivo data.csv e irá gerar como resultado um arquivo result.json que foi tratado conforme solicitado.<br/><b>Vale mencionar que ele também gera um objeto locazido ao final do json que mostra a quantidade de parcelas válidas e a quantidade de documentos válidos.</b>
+`csvApp -f .\data.csv -o .\result.json` Por fim o comando default da CLI realiza uma verificação linha a linha de todo o arquivo data.csv e irá gerar como resultado um arquivo result.json que foi tratado conforme solicitado.<br/><b>Vale mencionar que ele também gera um objeto localizado ao final do json que mostra a quantidade de parcelas válidas e a quantidade de documentos válidos.</b>
 
 Ex de um objeto inserido dentro de result.json
 ```
