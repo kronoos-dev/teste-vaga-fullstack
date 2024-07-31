@@ -1,0 +1,18 @@
+{
+  "name": "teste-vaga-fullstack",
+  "author": "Marcelo Senna",
+  "version": "1.0.0",
+  "description": "Você foi designado para desenvolver uma aplicação que deve lidar com grandes volumes de dados. Você deve rodar as seguintes validações e tratativas para cada um dos dados do arquivo e mostrar um retorno ao concluir a rotina. A aplicação será responsável por fornecer uma massa de dados considerável (cerca de 30GB) e deve ser capaz de lidar com dados fornecidos.",
+  "bin": {
+    "csvApp": "bin/index.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "license": "ISC",
+  "preferGlobal": true,
+  "dependencies": {
+    "cli-progress": "^3.12.0",
+    "csv-parser": "^3.0.0",
+    "yargs": "^17.7.2"
+  }
+}
