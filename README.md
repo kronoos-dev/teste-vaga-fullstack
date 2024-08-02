@@ -1,11 +1,13 @@
-# Passo a passo para rodar o projeto
+# Olá, seja bem vindo(a)! :)
 
-Primeiro instale as dependencia com:
-npm i 
+## Rodando localmente
+Siga o passo a passo abaixo para rodar o projeto
+```sh
+# instalando dependências
+$ npm install
+```
+E uma vez que finalizado com sucesso, podemos rodar o projeto com o seguinte comando:
 
-depois execue o comando npx abaixo para gerar o arquivo js:
-npx tsc
-
-Agora rode o script com:
-node dist/index.js
-
+```sh
+$ npm start
+```
