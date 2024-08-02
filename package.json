@@ -3,6 +3,9 @@
     "csv-parser": "^3.0.0",
     "typescript": "^5.5.4"
   },
+  "scripts": {
+    "start": "npx tsc && node dist/index.js"
+  },
   "devDependencies": {
     "@types/node": "^22.0.2"
   }
