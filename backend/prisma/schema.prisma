@@ -1,0 +1,45 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contrato {
+  id Int @id @default(autoincrement())
+  nrInst       Int
+  nrAgencia    Int
+  cdClient     Int
+  nmClient     String
+  nrCpfCnpj    String
+  nrContrato   Int
+  dtContrato   DateTime     
+  qtPrestacoes Int
+  vlTotal      Float
+  cdProduto    Int
+  dsProduto    String
+  cdCarteira   Int
+  dsCarteira   String
+  nrProposta   Int
+  nrPresta     Int
+  tpPresta     String
+  nrSeqPre     Int
+  dtVctPre     DateTime 
+  vlPresta     Float
+  vlMora       Float
+  vlMulta      Float
+  vlOutAcr     Float
+  vlIof        Float
+  vlDescon     Float
+  vlAtual      Float
+  idSituac     String
+  idSitVen     String
+  created_at   DateTime? @default(now())
+  updated_at   DateTime? @default(now())
+
+  @@map("contratos")
+}
